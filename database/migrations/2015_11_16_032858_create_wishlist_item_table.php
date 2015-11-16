@@ -14,7 +14,8 @@ class CreateWishlistItemTable extends Migration
     {
         \Schema::create('wishlist_items', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('claimed_by_user_id');
+            $table->integer('wishlist_id');
+            $table->integer('claimed_by_user_id', null)->nullable();
             $table->string('name');
             $table->string('url')->nullable();
             $table->integer('cost')->nullable();

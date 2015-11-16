@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGivingCircleUsersTable extends Migration
+class CreateGivingCircleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateGivingCircleUsersTable extends Migration
      */
     public function up()
     {
-        \Schema::create('giving_circle_users', function(Blueprint $table) {
+        \Schema::create('giving_circle_user', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('giving_circle_id');
             $table->string('user_id');
@@ -28,6 +28,6 @@ class CreateGivingCircleUsersTable extends Migration
      */
     public function down()
     {
-        \Schema::drop('giving_circle_users');
+        \Schema::drop('giving_circle_user');
     }
 }

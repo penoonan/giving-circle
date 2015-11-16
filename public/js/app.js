@@ -2,6 +2,8 @@
 Vue.config.delimiters = ['${', '}'];
 // make it look more dangerous
 Vue.config.unsafeDelimiters = ['{!!', '!!}'];
+
+Vue.config.debug = true
 var Errors = Vue.extend(
     {
         template: '<div v-if="errors.length > 0" class="alert alert-danger">'+

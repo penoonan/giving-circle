@@ -13,6 +13,7 @@ class WishlistItemTableSeeder extends Seeder
     public function run()
     {
         WishlistItem::create([
+            'wishlist_id' => 1,
             'name' => 'Socks!',
             'url' => 'http://www.sockdreams.com',
             'cost' => 10000

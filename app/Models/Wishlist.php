@@ -19,4 +19,13 @@ class Wishlist extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function givingCircle()
+    {
+        return $this->belongsTo(GivingCircle::class);
+    }
+
+    public function items()
+    {
+        return $this->hasMany(WishlistItem::class);
+    }
 }

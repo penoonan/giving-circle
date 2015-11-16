@@ -2,3 +2,5 @@
 Vue.config.delimiters = ['${', '}'];
 // make it look more dangerous
 Vue.config.unsafeDelimiters = ['{!!', '!!}'];
+
+Vue.config.debug = true

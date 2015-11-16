@@ -1,6 +1,8 @@
 <?php namespace App;
 
+use App\Models\GivingCircle;
 use App\Models\Wishlist;
+use App\Models\WishlistItem;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -28,9 +30,19 @@ class User extends Model implements Authenticatable
     protected $hidden = ['password', 'remember_token'];
 
 
-    public function wishlist()
+    public function wishlists()
     {
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function givingCircles()
+    {
+        return $this->belongsToMany(GivingCircle::class)->withTimestamps();
+    }
+
+    public function items()
+    {
+        return $this->hasManyThrough(WishlistItem::class, Wishlist::class);
     }
 
 }

@@ -1,20 +1,25 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Models\GivingCircle;
+use App\User;
+
 class UserController extends Controller
 {
     public function profile()
     {
-        $user = app('auth')->user();
-        $user->with('wishlist');
-        $list = $user->wishlist->transform(function($item) {
-            return [
-                'name' => $item->name,
-                'cost' => $item->cost,
-                'url' => $item->url
-            ];
-        });
-        app('javascript')->put('user', $user->getAttributes() + ['wishlist' => $list]);
+        $user_id = app('auth')->user()->getKey();
+
+        $user = User::with('wishlists', 'wishlists.givingCircle', 'wishlists.items')
+            ->where('id', '=', $user_id)
+            ->get()
+            ->first()
+        ;
+
+        js([
+            'user' => $user->getAttributes(),
+            'wishlists' => $user->wishlists->toArray()
+        ]);
         return view('profile');
     }
 }

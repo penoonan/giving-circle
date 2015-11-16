@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call('UserTableSeeder');
+        $this->call('GivingCircleTableSeeder');
         $this->call('WishlistTableSeeder');
-
+        $this->call('WishlistItemTableSeeder');
 
         Model::reguard();
     }

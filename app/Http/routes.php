@@ -6,7 +6,7 @@ $app->post('/login', ['as' => 'authenticate', 'uses' => 'AuthStuff@authenticate'
 $app->get('/logout', ['as' => 'logout', 'uses' => 'AuthStuff@login']);
 $app->post('/register', ['as' => 'register', 'uses' => 'AuthStuff@register']);
 
-$app->group(['middleware' => 'auth'], function() use($app) {
+$app->group(['middleware' => 'auth', 'namespace' => 'App\Http\Controllers'], function() use($app) {
 
     $app->get('/', ['as' => 'profile', 'uses' => 'UserController@profile']);
 

@@ -20,6 +20,6 @@ class UserController extends Controller
             'user' => $user->getAttributes(),
             'wishlists' => $user->wishlists->toArray()
         ]);
-        return view('profile');
+        return view('profile', ['user' => $user]);
     }
 }

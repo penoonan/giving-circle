@@ -1,58 +1,47 @@
 @extends('app')
 
 @section('content')
-
     <div id="app">
-        <h1 v-cloak>Hello ${ name }</h1>
+        <h1>Hello {{ $user->name }}</h1>
         <div class="col-sm-6">
             <h2>My Wishlists</h2>
-            <div v-for="list in wishlists" class="panel panel-default">
+            @foreach ($user->wishlists as $list)
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">${ list.giving_circle.name }</h3>
+                    <h3 class="panel-title">{{ $list->givingCircle->name }}</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table" v-if="list.items && list.items.length > 0">
+                    @if ($list->items->count() > 0)
+                    <table class="table">
                         <thead>
                         <tr>
                             <th>Name</th>
                             <th>Cost</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="item in list.items">
+                        @foreach($list->items as $item)
+                        <tr>
                             <td>
-                                <a v-if="item.url && item.url.length" target="_blank" href="${ item.url }">${ item.name }</a>
-                                <span v-else>${ item.name }</span>
+                                @if ($item->url)
+                                <a target="_blank" href="{{ $item->url }}">{{ $item->name }}</a>
+                                @else
+                                <span>{{ $item->name }}</span>
+                                @endif
                             </td>
-                            <td>$${ item.cost }</td>
+                            <td>${{ $item->cost }}</td>
+                            <td><a href="{{ route('wishlist.item.edit', ['wishlist_id' => $list->id, 'item_id' => $item->id ]) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                         </tr>
+                        @endforeach
                         </tbody>
 
                     </table>
+                    @endif
                 </div>
-
             </div>
+            @endforeach
         </div>
-
-
     </div>
-
-
-
-
 @stop
 
-@section('scripts')
-    @parent
-
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                name: gc.user.first_name + ' ' + gc.user.last_name,
-                wishlists: gc.wishlists
-            }
-        })
-    </script>
-
-@endsection

@@ -45,4 +45,9 @@ class User extends Model implements Authenticatable
         return $this->hasManyThrough(WishlistItem::class, Wishlist::class);
     }
 
+    public function getNameAttribute()
+    {
+        return ucwords($this->first_name . ' ' . $this->last_name);
+    }
+
 }

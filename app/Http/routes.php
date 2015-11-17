@@ -16,6 +16,26 @@ $app->group(['middleware' => 'auth', 'namespace' => 'App\Http\Controllers'], fun
 
     });
 
+    $app->group(['prefix' => 'wishlist', 'namespace' => 'App\Http\Controllers'], function() use($app) {
+
+        $app->get('/{wishlist_id}/items/{item_id}', [
+            'as' => 'wishlist.item.show',
+            'uses' => 'WishlistItemController@show'
+        ]);
+        $app->get('/{wishlist_id}/items/{item_id}/edit', [
+            'as' => 'wishlist.item.edit',
+            'uses' => 'WishlistItemController@edit'
+        ]);
+
+        $app->put('/{wishlist_id}/items/{item_id}', [
+            'as' => 'wishlist.item.update',
+            'uses' => 'WishlistItemController@update'
+        ]);
+
+
+
+    });
+
 
     $app->group(['prefix' => 'api'], function() use($app) {
 

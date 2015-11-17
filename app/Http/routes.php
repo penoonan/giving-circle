@@ -1,10 +1,10 @@
 <?php
 $auth = app('auth');
 
+$app->post('/register', ['as' => 'register', 'uses' => 'AuthStuff@register']);
 $app->get('/login', ['as' => 'login', 'uses' => 'AuthStuff@login']);
 $app->post('/login', ['as' => 'authenticate', 'uses' => 'AuthStuff@authenticate']);
-$app->get('/logout', ['as' => 'logout', 'uses' => 'AuthStuff@login']);
-$app->post('/register', ['as' => 'register', 'uses' => 'AuthStuff@register']);
+$app->get('/logout', ['as' => 'logout', 'uses' => 'AuthStuff@logout']);
 
 $app->group(['middleware' => 'auth', 'namespace' => 'App\Http\Controllers'], function() use($app) {
 
